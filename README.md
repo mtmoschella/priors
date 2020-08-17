@@ -1,5 +1,7 @@
 # priors
-This is some code I hacked for implementing priors in emcee and pymultinest
+This is some code I hacked for implementing priors in emcee and pymultinest.
+
+Supports the following classes for use: `FlatPrior`, `GaussianPrior`, and `LogNormalPrior`
 
 The basic use is as follows
 
