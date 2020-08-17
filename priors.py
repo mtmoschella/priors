@@ -1,17 +1,26 @@
+import numpy as np
+from abc import ABCMeta, abstractmethod
+
 class Prior:
-    # abstract functor class used to supplement lnprior function for emcee
+    """
+    abstract functor class used to supplement lnprior function for emcee/pymultinest
+    """
     __metaclass__ = ABCMeta # sets class to be abstract
     
     @abstractmethod
     def __call__(self, x):
-        # any implementation must implement this function
-        # returns the lnprior
+        """
+        any implementation must implement this function
+        returns the lnprior
+        """
         pass
 
     @abstractmethod
     def support(self):
-        # any implementation must implement this function
-        # returns the range of inputs such that the prior does not evaluate to -np.inf
+        """
+        any implementation must implement this function
+        returns the range of inputs such that the prior does not evaluate to -np.inf
+        """
         pass
 
 class FlatPrior(Prior):
@@ -41,8 +50,10 @@ class GaussianPrior(Prior):
 
 class LogNormalPrior(Prior):
     def __init__(self, xmean, xstd):
-        # xmean, xstd are the mean & stddev of the lognormal distribution
-        # mu, sigma are the mean & stddev of log(x), the gaussian parameters
+        """
+        xmean, xstd are the mean & stddev of the lognormal distribution
+        mu, sigma are the mean & stddev of log(x), the gaussian parameters
+        """
         self.mu = np.log(xmean/np.sqrt(1+xstd**2/xmean**2))
         self.sigma = np.sqrt(np.log(1+xstd**2/xmean**2))
 
