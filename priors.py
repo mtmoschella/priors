@@ -43,7 +43,7 @@ class GaussianPrior(Prior):
         self.xstd = xstd
     
     def __call__(self, x):
-        return -0.5*(x-xmean)**2/xstd**2
+        return -0.5*(x-self.xmean)**2/self.xstd**2
 
     def support(self):
         return (-np.inf, np.inf)
